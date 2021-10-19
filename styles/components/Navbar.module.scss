@@ -1,0 +1,16 @@
+.nav {
+  background: var(--color-bg-primary);
+  width: 100%;
+  padding: 20px 30px;
+  // height: 50px;
+  position: fixed;
+
+  .main {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
