@@ -3,9 +3,7 @@ import styled from "@emotion/styled"
 
 export const ThemeToggle = () => {
 
-  type BodyType = string | undefined
-
-  const [activeTheme, setActiveTheme] = useState<BodyType>(document.body.dataset.theme)
+  const [activeTheme, setActiveTheme] = useState<string>(document.body.dataset.theme!)
   const inactiveTheme = activeTheme === "light" ? "dark" : "light"
 
   useEffect(() => {

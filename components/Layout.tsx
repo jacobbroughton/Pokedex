@@ -1,10 +1,12 @@
 import { Navbar } from "./Navbar"
+import { FC } from "react"
 
-type LayoutProps = {
+
+interface LayoutProps {
   children: JSX.Element
 }
 
-export const Layout = ({ children } : LayoutProps) => {
+export const Layout: FC<LayoutProps> = ({ children } : LayoutProps) => {
   return (
     <>
       <Navbar/>

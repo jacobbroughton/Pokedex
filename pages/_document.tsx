@@ -2,7 +2,7 @@ import Document, { Html, Head, Main, NextScript } from "next/document";
 
 class MyDocument extends Document {
 
-  static async getInitialProps(ctx) {
+  static async getInitialProps(ctx:any) {
     console.log(ctx)
     const initialProps = await Document.getInitialProps(ctx);
     return { ...initialProps };
