@@ -1,16 +1,24 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import { useRouter, NextRouter } from "next/router"
 import styles from '../styles/Home.module.css'
 import PokemonList from "../components/PokemonList"
+import { useEffect, useState } from 'react'
+import { usePaginationContext } from "../contexts/PaginationProvider"
+import { usePokemonData, usePokemonDataUpdate } from "../contexts/PokemonDataContext"
+import Filters from '../components/Filters'
 
-type PokemonListProps = {
-  data: object
-}
+const Home: NextPage = () => {
 
-const Home: NextPage<PokemonListProps> = ({ data }) => {
+  const getPokemon = usePokemonDataUpdate()
+  const router = useRouter()
+  let { limit, offset } = router.query
 
-  console.log(data)
+  useEffect(() => {
+    getPokemon(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`)
+  }, [limit, offset])
+
 
   return (
     <div className={styles.container}>
@@ -19,18 +27,10 @@ const Home: NextPage<PokemonListProps> = ({ data }) => {
         <meta name="description" content="Created by Jacob Broughton" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <PokemonList data={data}/>
+      <Filters/>
+      <PokemonList/>
     </div>
   )
-}
-
-export const getStaticProps = async () => {
-  const response = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=20&offset=20")
-  const data = await response.json()
-
-  return {
-    props: { data }
-  }
 }
 
 export default Home

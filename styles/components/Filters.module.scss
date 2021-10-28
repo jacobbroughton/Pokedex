@@ -1,0 +1,66 @@
+.aside {
+  position: absolute;
+  top: 130px;
+  left: 0;
+  width: 200px;
+  background: var(--card-background);
+  box-shadow: var(--card-shadow);
+  height: fit-content;
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .filters-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .type-filters {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+  }
+
+  .type-filters button {
+    text-align: start;
+    padding: 3px 5px;
+    border: 0;
+    border-radius: 3px;
+
+    &.normal { background: #A8A77A; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+    &.fire { background: #EE8130; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+    &.water { background: #6390F0; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+    &.electric { background: #F7D02C; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+    &.grass { background: #7AC74C; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+    &.ice { background: #96D9D6; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+    &.fighting { background: #C22E28; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+    &.poison { background: #A33EA1; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+    &.ground { background: #E2BF65; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+    &.flying { background: #A98FF3; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+    &.psychic { background: #F95587; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+    &.bug { background: #A6B91A; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+    &.rock { background: #B6A136; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+    &.ghost { background: #735797; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+    &.dragon { background: #6F35FC; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+    &.dark { background: #705746; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+    &.steel { background: #B7B7CE; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+    &.fairy { background: #D685AD; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+  }
+
+  .generation-filters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+  }
+
+  .generation-filters button {
+    border: 0;
+    border-radius: 3px;
+    padding: 3px 5px;
+    background: var(--filter-button-background);
+    color: var(--color-text-primary);
+  }
+}

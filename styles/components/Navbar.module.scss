@@ -1,9 +1,11 @@
 .nav {
-  background: var(--color-bg-primary);
+  background: var(--card-background);
   width: 100%;
   padding: 20px 30px;
   // height: 50px;
   position: fixed;
+  box-shadow: var(--heavy-shadow);
+  z-index: 3;
 
   .main {
     width: 100%;
@@ -12,5 +14,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    img {
+      max-height: 40px;
+    }
   }
 }

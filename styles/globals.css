@@ -1,3 +1,8 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
 html,
 body {
   padding: 0;
@@ -14,20 +19,28 @@ body {
   --red: #e84848;
   --grey: #666666;
   --blue: #2ab1c6;
-  --lightblue: #4dc9dc;
+  /* --lightblue: #4dc9d */
 
 }
 
 body[data-theme="light"] {
-  --color-bg-primary: #fafafa; 
+  --color-bg-primary: #f0f2f6; 
   --color-bg-secondary: #f5f5f5;
   --color-text-primary: #192331;
+  --card-background: #fff;
+  --filter-button-background: #eee;
+  --heavy-shadow: 2px 2px 5px rgb(0 0 0 / 12%);
+  --card-shadow: 0 1px 2px rgb(0 0 0 / 20%);
 }
 
 body[data-theme="dark"] {
-  --color-bg-primary: #000000; 
+  --color-bg-primary: #333; 
   --color-bg-secondary: #192331;
   --color-text-primary: #ffffff;
+  --card-background: #444;
+  --filter-button-background: #555;
+  --heavy-shadow: 2px 2px 5px rgb(0 0 0 / 24%);
+  --card-shadow: 0 1px 2px #000;
 }
 
 body {

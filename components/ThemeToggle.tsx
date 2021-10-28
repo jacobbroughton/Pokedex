@@ -14,8 +14,9 @@ export const ThemeToggle = () => {
   const Button = styled.button`
     background: transparent;
     border: 0;
-    font-size: 1rem;
+    font-size: 1.4rem;
     height: 28px;
+    cursor: pointer;
   `
 
   return (

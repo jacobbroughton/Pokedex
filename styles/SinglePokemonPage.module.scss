@@ -1,0 +1,67 @@
+.single-pokemon-page {
+  padding-top: 120px;
+
+  main {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .sprites {
+      display: flex;
+      gap: 10px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .pokemon-types {
+      display: flex;
+      gap: 10px;
+      .pokemon-type {
+        padding: 3px 5px;
+        border-radius: 3px;
+        margin: 0;
+
+        &.normal { background: #A8A77A; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+        &.fire { background: #EE8130; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+        &.water { background: #6390F0; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+        &.electric { background: #F7D02C; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+        &.grass { background: #7AC74C; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+        &.ice { background: #96D9D6; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+        &.fighting { background: #C22E28; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+        &.poison { background: #A33EA1; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+        &.ground { background: #E2BF65; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+        &.flying { background: #A98FF3; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+        &.psychic { background: #F95587; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+        &.bug { background: #A6B91A; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+        &.rock { background: #B6A136; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+        &.ghost { background: #735797; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+        &.dragon { background: #6F35FC; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+        &.dark { background: #705746; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+        &.steel { background: #B7B7CE; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+        &.fairy { background: #D685AD; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+      }
+    }
+
+    .stats {
+      background: var(--card-background);
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      .stat-items {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        .stat-item {
+          display: flex;
+          gap: 10px;
+        }
+      }
+
+    }
+  }
+}
