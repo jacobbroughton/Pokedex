@@ -15,9 +15,11 @@ const Home: NextPage = () => {
   const router = useRouter()
   let { limit, offset } = router.query
 
-  useEffect(() => {
-    getPokemon(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`)
-  }, [limit, offset])
+  // useEffect(() => {
+  //   // if(limit !== undefined && offset !== undefined) {
+  //     getPokemon(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`)
+  //   // }
+  // }, [limit, offset])
 
 
   return (

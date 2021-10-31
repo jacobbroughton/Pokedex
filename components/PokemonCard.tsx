@@ -6,6 +6,8 @@ import styles from "../styles/components/PokemonCard.module.scss"
 
 const PokemonCard = ({ pokemon }) => {
 
+  console.log(pokemon)
+
   const [imageLoading, setImageLoading] = useState(true)
 
 
@@ -23,13 +25,17 @@ const PokemonCard = ({ pokemon }) => {
   // )
 
   return (
-    <Link href={`/pokemon/${pokemon.name}`}>
+    <Link href={`/pokemon/${pokemon.id}`}>
       <div className={styles['pokemon-card']}>
         <div className={styles['pokemon-info']}>
-  <p className={styles['pokemon-name']}> { useFormattedName(pokemon.name) }</p>
+          <div className={styles['name-and-id']}>
+            <p className={styles['pokemon-name']}> { useFormattedName(pokemon.name.english) }</p>
+            <p className={styles['pokemon-id']}># {pokemon.id}</p>
+          </div>
+
           <div className={styles['pokemon-types']}>
-            {pokemon.types.map(typeItem => 
-              <p className={`${styles[`pokemon-type`]} ${styles[`${typeItem.type.name}`]}`}>{typeItem.type.name}</p>
+            {pokemon.type.map(typeItem => 
+              <p className={`${styles[`pokemon-type`]} ${styles[`${typeItem.toLowerCase()}`]}`}>{typeItem}</p>
             )}
           </div>
         </div>
@@ -37,10 +43,10 @@ const PokemonCard = ({ pokemon }) => {
        { imageLoading && <div className={styles['image-placeholder']}></div>}
 
 
-        { pokemon.sprites['front_default'] ? 
+        { pokemon.hires ? 
           <img 
             onLoad={() => setImageLoading(false)} 
-            src={pokemon.sprites['front_default']} 
+            src={pokemon.hires} 
             className={styles[`pokemon-image`]}/>
           :
           <span className={styles["unknown-pokemon-image-placeholder"]}>?</span>

@@ -4,6 +4,8 @@ import type { AppProps } from 'next/app'
 import { Layout } from "../components/Layout"
 import { PaginationProvider } from "../contexts/PaginationProvider"
 import { PokemonDataProvider } from "../contexts/PokemonDataContext"
+import { FiltersProvider } from "../contexts/FiltersContext"
+
 
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -16,9 +18,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <PaginationProvider value={defaultPaginationValues}>
       <PokemonDataProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout> 
+        <FiltersProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout> 
+        </FiltersProvider>
       </PokemonDataProvider>
     </PaginationProvider>
 
