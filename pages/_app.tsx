@@ -17,15 +17,15 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <PaginationProvider value={defaultPaginationValues}>
-      <PokemonDataProvider>
-        <FiltersProvider>
+      <FiltersProvider>
+        <PokemonDataProvider>
           <Layout>
             <Component {...pageProps} />
           </Layout> 
-        </FiltersProvider>
-      </PokemonDataProvider>
+        </PokemonDataProvider>
+      </FiltersProvider>
     </PaginationProvider>
-
   )
 }
+
 export default MyApp

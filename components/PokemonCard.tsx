@@ -6,23 +6,7 @@ import styles from "../styles/components/PokemonCard.module.scss"
 
 const PokemonCard = ({ pokemon }) => {
 
-  console.log(pokemon)
-
   const [imageLoading, setImageLoading] = useState(true)
-
-
-  // if(loading) return (
-  //   <div className={styles['pokemon-card']}>
-  //     <div className={styles['pokemon-info']}>
-  //       <div className="placeholder name"></div>
-  //       <div className="placeholder-types-parent">
-  //         <div className="placeholder types"></div>
-  //         <div className="placeholder types"></div>
-  //       </div>
-  //     </div>
-  //     <div className='placeholder'></div>
-  //   </div>
-  // )
 
   return (
     <Link href={`/pokemon/${pokemon.id}`}>
@@ -34,13 +18,16 @@ const PokemonCard = ({ pokemon }) => {
           </div>
 
           <div className={styles['pokemon-types']}>
-            {pokemon.type.map(typeItem => 
-              <p className={`${styles[`pokemon-type`]} ${styles[`${typeItem.toLowerCase()}`]}`}>{typeItem}</p>
+            {pokemon.type.map((typeItem, index) => 
+              <p 
+                className={`${styles[`pokemon-type`]} ${styles[`${typeItem.toLowerCase()}`]}`}
+                key={index}
+              >{typeItem}</p>
             )}
           </div>
         </div>
 
-       { imageLoading && <div className={styles['image-placeholder']}></div>}
+       {/* { imageLoading && <div className={styles['image-placeholder']}></div>} */}
 
 
         { pokemon.hires ? 

@@ -9,6 +9,8 @@ const Filters = () => {
   const getPokemon = usePokemonDataUpdate()
   const [filters, setFilters] = useFilters()
 
+  const { type, generation } = filters
+
   let types = [
     { 
       name: "normal"
@@ -63,12 +65,6 @@ const Filters = () => {
     },
     { 
       name: "fairy"
-    },
-    { 
-      name: "unknown"
-    },
-    { 
-      name: "shadow"
     }
   ]
 
@@ -128,8 +124,17 @@ const Filters = () => {
     <aside className={styles.aside}>
       <h3>Filters</h3>
       <hr/>
-       <div className={styles['filters-section']}>
-        <h4>By Type</h4>        
+       <div className={styles['filter-section']}>
+        <div className={styles['filter-section-header']}>
+          <h4>By Type</h4>
+          <button
+            className={styles['filter-reset-button']}
+            onClick={() => setFilters({
+              ...filters,
+              type: null
+            })}
+          >Reset</button>
+        </div>        
         <div className={styles['type-filters']}>
           {types.map((type, index) => 
             <button 
@@ -144,20 +149,35 @@ const Filters = () => {
         </div>
        </div>
 
-      <div className={styles['filters-section']}>
-        <h4>By Generation</h4>        
+      <div className={styles['filter-section']}>
+        <div className={styles['filter-section-header']}>
+          <h4>By Generation</h4>
+          <button
+            className={styles['filter-reset-button']}
+            onClick={() => setFilters({
+              ...filters,
+              generation: {
+                idStart: null,
+                idEnd: null
+              }
+            })}
+          >Reset</button>
+        </div>
         <div className={styles['generation-filters']}>
-          {generations.map((generation, index) => 
+          {generations.map((gen, index) => 
             <button 
               key={index} 
+              className={
+                styles['filter-reset-button']
+              }
               onClick={() => setFilters({
                 ...filters,
                 generation: {
-                  idStart: generation.firstPokemonId,
-                  idEnd: generation.lastPokemonId
+                  idStart: gen.firstPokemonId,
+                  idEnd: gen.lastPokemonId
                 }
               })}
-            >{generation.name}</button>
+            >{gen.name}</button>
           )}
         </div>
       </div>

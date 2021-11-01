@@ -37,7 +37,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // const response = await fetch(`/api/pokemon`)
-  const pokemon = PokedexData
+  const response = await fetch('http://localhost:3000/api/pokemon')
+  const pokemon = await response.json()
 
   const paths = pokemon.map(pokemon => ({
     params: { id: toString(pokemon.id) }

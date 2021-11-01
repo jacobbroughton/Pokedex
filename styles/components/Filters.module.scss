@@ -12,10 +12,30 @@
   flex-direction: column;
   gap: 20px;
 
-  .filters-section {
+  .filter-section {
     display: flex;
     flex-direction: column;
     gap: 10px;
+  }
+
+  .filter-section-header {
+    display: flex;
+    gap: 10px;
+  }
+
+  .filter-section-header .filter-reset-button {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: var(--color-text);
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    font-size: 0.8rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   .type-filters {
