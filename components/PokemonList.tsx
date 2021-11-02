@@ -27,15 +27,11 @@ const PokemonList: FC = () => {
  
 
   useEffect(() => {
-
     if(!limit && !offset) {
       router.push('?limit=20&offset=0')
     }
   }, []) 
 
-  useEffect(() => {
-    console.log(pokemonData)
-  }, [pokemonData])
   
   if(isLoading) return (
    <Loading/>
@@ -43,25 +39,33 @@ const PokemonList: FC = () => {
 
   return (
     <div className={styles['pokemon-list']}>
-      {/* {<h3>Showing {count ? `results ${offset} - ${sumForNext > count ? count : sumForNext} out of ${count} total results` : `${results.length} results`}</h3>} */}
-      { pokemonData && 
-        pokemonData?.map((pokemon: object, index: number) => 
-          <PokemonCard pokemon={pokemon} key={index}/>
-          // <img className={styles['thumbnail-img']} key={index} src={pokemon.hires}/>
-        )
+      {<h3>Showing {pokemonData.length} results</h3>}
+      { pokemonData?.length === 0 ?
+        <div className={styles['no-results-found']}>
+          <h3>No results, try a different set of filters</h3>
+
+        </div>
+        :
+        <>
+          { pokemonData?.map((pokemon: object, index: number) => 
+            <PokemonCard pokemon={pokemon} key={index}/>
+            // <img className={styles['thumbnail-img']} key={index} src={pokemon.hires}/>
+          )}   
+          <div className={styles['previous-and-next-buttons']}>
+            {/* {previous && 
+              <Link href={`/?limit=${limit ? limit : 20}&offset=${offset ? sumForPrevious : 0}`}>
+                <a className={styles['previous-button']}>Previous</a>
+              </Link>
+            } */}
+            {/* {next && 
+              <Link href={`/?limit=${limit ? limit: 20}&offset=${offset ? sumForNext : 20}`}>
+                <a className={styles['next-button']}>Next</a>
+              </Link>
+            } */}
+          </div>
+        </>
       }
-      <div className={styles['previous-and-next-buttons']}>
-        {/* {previous && 
-          <Link href={`/?limit=${limit ? limit : 20}&offset=${offset ? sumForPrevious : 0}`}>
-            <a className={styles['previous-button']}>Previous</a>
-          </Link>
-        } */}
-        {/* {next && 
-          <Link href={`/?limit=${limit ? limit: 20}&offset=${offset ? sumForNext : 20}`}>
-            <a className={styles['next-button']}>Next</a>
-          </Link>
-        } */}
-      </div>
+
     </div>
   )
 }

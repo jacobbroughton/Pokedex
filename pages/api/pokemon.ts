@@ -3,25 +3,58 @@ import PokedexData from "../../pokedex.json"
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
-  const { type, from, to } = req.query
+  let { type, from, to, minWeight, maxWeight, minHeight, maxHeight } = req.query
+  from = parseInt(from)
+  to = parseInt(to)
+  minWeight = parseInt(minWeight)
+  maxWeight = parseInt(maxWeight)
+  minHeight = parseInt(minHeight)
+  maxHeight = parseInt(maxHeight)
   console.log(req.query)
 
   let filteredPokedexData = PokedexData
 
+  // Min height: 0m
+  // Max height: 20m
+
+  function parseStringToFloat(string) {
+    return parseFloat(string.replace('kg', '').replace(/\s/g, ''))
+  }
+
   if(from && to) {
     filteredPokedexData = filteredPokedexData.filter(data => 
-      data.id >= parseInt(from) && data.id <= parseInt(to)
+      data.id >= from && data.id <= to
+      &&
+      (parseStringToFloat(data.profile.weight) >= minWeight && parseStringToFloat(data.profile.weight) <= maxWeight)
+      &&
+      (parseStringToFloat(data.profile.height) >= minHeight && parseStringToFloat(data.profile.height) <= maxHeight)
     )
-    console.log('TO/FROM FILTERED', filteredPokedexData[0].name.english)
   }
 
 
   if(type) {
     filteredPokedexData = filteredPokedexData.filter(data => 
       data.type.includes(type[0].toUpperCase() + type.substring(1))
+      &&
+      (parseStringToFloat(data.profile.weight) >= minWeight && parseStringToFloat(data.profile.weight) <= maxWeight)
+      &&
+      (parseStringToFloat(data.profile.height) >= minHeight && parseStringToFloat(data.profile.height) <= maxHeight)
     )
-    console.log('TYPE FILTERED', filteredPokedexData[0].name.english)
   }
+
+
+
+  filteredPokedexData = filteredPokedexData.filter(data => 
+    (parseStringToFloat(data.profile.weight) >= minWeight 
+    && 
+    parseStringToFloat(data.profile.weight) <= maxWeight)
+  )
+
+  filteredPokedexData = filteredPokedexData.filter(data => 
+    (parseStringToFloat(data.profile.height) >= minHeight 
+    && 
+    parseStringToFloat(data.profile.height) <= maxHeight)
+  )
 
   // console.log(filteredPokedexData)
 

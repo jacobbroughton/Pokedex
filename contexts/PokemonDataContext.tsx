@@ -21,7 +21,10 @@ export function PokemonDataProvider({ children }: PokemonDataProviderProps) {
 
   const [filters] = useFilters()
 
-  const { type, generation } = filters
+  const { type, generation, weight, height } = filters
+  const { idStart, idEnd } = generation
+  const { weightStart, weightEnd } = weight
+  const { heightStart, heightEnd } = height
 
   const [pokemonData, setPokemonData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -33,8 +36,20 @@ export function PokemonDataProvider({ children }: PokemonDataProviderProps) {
   }
 
   useEffect(() => {
-    getPokemon(`http://localhost:3000/api/pokemon${type ? `?type=${type}` : ''}${(generation?.idStart && generation?.idEnd) ? `${type ? '&' : '?'}from=${generation.idStart}&to=${generation.idEnd}` : ''}`)
-  }, [type, generation])
+    getPokemon(`
+    http://localhost:3000/api/pokemon
+    ${type ? `?type=${type}` : ''}
+    ${(idStart && idEnd) 
+      ? `${type ? '&' : '?'}from=${idStart}&to=${idEnd}` 
+      : ''}
+    ${`${type || (idStart && idEnd) ? '&' : '?'}minWeight=${weightStart}&maxWeight=${weightEnd}`}
+    &minHeight=${heightStart}&maxHeight=${heightEnd}
+    `.replace(/\s/g, ''))
+  }, [type, generation, weight, height])
+
+  useEffect(() => {
+    console.log(pokemonData[0])
+  }, [pokemonData])
 
   return (
     <PokemonDataContext.Provider value={{pokemonData, isLoading}}>

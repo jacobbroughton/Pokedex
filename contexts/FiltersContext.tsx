@@ -5,6 +5,14 @@ const FiltersContext = createContext({
   generation: {
     idStart: null,
     idEnd: null
+  },
+  weight: {
+    weightStart: 0,
+    weightEnd: 1000
+  },
+  height: {
+    heightStart: 0,
+    heightEnd: 20
   }
 })
 
@@ -17,13 +25,27 @@ interface FiltersProviderProps {
   children: JSX.Element
 }
 
-export function FiltersProvider({ children, value }: FiltersProviderProps) {
+export function FiltersProvider({ children }: FiltersProviderProps) {
 
-  const [filters, setFilters] = useState({})
+  const [filters, setFilters] = useState({  
+    type: null,
+    generation: {
+      idStart: null,
+      idEnd: null
+    },
+    weight: {
+      weightStart: 0,
+      weightEnd: 1000
+    },
+    height: {
+      heightStart: 0,
+      heightEnd: 20
+    }
+  })
 
-  useEffect(() => {
-    console.log('---FILTERS---', filters)
-  }, [filters])
+  // useEffect(() => {
+  //   console.log('---FILTERS---', filters)
+  // }, [filters])
 
 
   return (
