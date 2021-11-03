@@ -7,8 +7,8 @@
   border-radius: 5px;
   padding: 15px 30px;
   transition: box-shadow, transform 0.1s ease;
-  cursor: pointer;
   box-shadow: var(--card-shadow);
+  cursor: pointer;
 
   &.loading {
     background: green;
@@ -42,8 +42,8 @@
         // background: darkorange;
         // padding: 3px 5px;
         // align-self: flex-start;
-        color: #fff;
-        text-shadow: 2px 2px 2px #1818183c;
+        color: var(--color-text-primary);
+        // text-shadow: 2px 2px 2px #1818183c;
         font-size: 0.8rem;
         font-weight: 500;
       }

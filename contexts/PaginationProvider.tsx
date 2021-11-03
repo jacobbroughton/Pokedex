@@ -1,38 +1,48 @@
-import { useContext, createContext } from "react"
+import { useContext, useState, useEffect, createContext } from "react"
+import { useRouter } from "next/router"
 
 
 // Create context object
 interface PaginationContextProps {
-  limit: number,
-  offset: number
+  limit: string | null,
+  offset: string| null
 }
 
 const PaginationContext = createContext<PaginationContextProps>({
-  limit: 20,
-  offset: 0
+  limit: '20',
+  offset: '0'
 })
-
 
 // Export provider
 interface PaginationProviderProps {
-  limit: number,
-  offset: number,
   children: JSX.Element
 }
 
+export function usePagination() {
+  return useContext(PaginationContext)
+}
 
-export function PaginationProvider(props: PaginationProviderProps) {
 
-  const {  children } = props
+export function PaginationProvider({ children }: PaginationProviderProps) {
 
-  // Default values
-  const defaultPaginationValues = {
-    limit: 20,
-    offset: 0
-  }
+  const { query, isReady } = useRouter()
+  let { limit: limitFromQuery, offset: offsetFromQuery } = query
+  
+
+  const [paginationValues, setPaginationValues] = useState({
+    limit: null,
+    offset: null
+  })
+
+  useEffect(() => {
+    setPaginationValues({
+      limit: limitFromQuery,
+      offset: offsetFromQuery
+    })
+  }, [isReady])
 
   return (
-    <PaginationContext.Provider value={defaultPaginationValues}>
+    <PaginationContext.Provider value={[paginationValues, setPaginationValues]}>
       { children }
     </PaginationContext.Provider>
   )

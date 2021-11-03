@@ -1,17 +1,40 @@
 .aside {
-  position: fixed;
-  top: 105px;
-  left: 20px;
+  // position: fixed;
+  // top: 105px;
+  // left: 20px;
   width: 200px;
   background: var(--card-background);
   box-shadow: var(--card-shadow);
   height: fit-content;
-  padding: 20px;
+  padding: 15px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   z-index: 2;
+
+  .filters-heading {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    border-bottom: 1px solid var(--color-bg-primary);
+    padding-bottom: 10px;
+  }
+
+  .filters-heading .all-filters-reset-button {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: var(--color-text);
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    font-size: 0.8rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 
   .filter-section {
     display: flex;
@@ -41,7 +64,7 @@
 
   .type-filters {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 5px;
   }
 
@@ -51,26 +74,28 @@
     border: 0;
     border-radius: 3px;
     cursor: pointer;
+    color: #fff; 
+    text-shadow: 1px 1px 2px #18181857;
 
 
-    &.normal { background: #A8A77A; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
-    &.fire { background: #EE8130; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
-    &.water { background: #6390F0; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
-    &.electric { background: #F7D02C; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
-    &.grass { background: #7AC74C; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
-    &.ice { background: #96D9D6; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
-    &.fighting { background: #C22E28; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
-    &.poison { background: #A33EA1; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
-    &.ground { background: #E2BF65; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
-    &.flying { background: #A98FF3; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
-    &.psychic { background: #F95587; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
-    &.bug { background: #A6B91A; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
-    &.rock { background: #B6A136; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
-    &.ghost { background: #735797; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
-    &.dragon { background: #6F35FC; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
-    &.dark { background: #705746; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
-    &.steel { background: #B7B7CE; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
-    &.fairy { background: #D685AD; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
+    &.normal { background: #A8A77A; }
+    &.fire { background: #EE8130; }
+    &.water { background: #6390F0; }
+    &.electric { background: #F7D02C; text-shadow: 1px 1px 1px #18181877; }
+    &.grass { background: #7AC74C; }
+    &.ice { background: #96D9D6; }
+    &.fighting { background: #C22E28; }
+    &.poison { background: #A33EA1; }
+    &.ground { background: #E2BF65; text-shadow: 1px 1px 1px #18181877; }
+    &.flying { background: #A98FF3; }
+    &.psychic { background: #F95587; }
+    &.bug { background: #A6B91A; }
+    &.rock { background: #B6A136; }
+    &.ghost { background: #735797; }
+    &.dragon { background: #6F35FC; }
+    &.dark { background: #705746; }
+    &.steel { background: #B7B7CE; text-shadow: 1px 1px 1px #18181877; }
+    &.fairy { background: #D685AD; }
   }
 
   .generation-filters {
@@ -79,13 +104,35 @@
     gap: 5px;
   }
 
-  .generation-filters button {
+  .input-and-max-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .generation-filters button,
+  .input-and-max-button button {
     border: 0;
     border-radius: 3px;
     padding: 3px 5px;
     background: var(--filter-button-background);
     color: var(--color-text-primary);
     cursor: pointer;
+    transition: border .15s ease;
+    border: 1px solid transparent;
+
+    &.selected{
+      border: var(--button-border);
+    }
+  }
+
+  .range-results {
+    display: flex;
+    gap: 5px;
+
+    span {
+      font-size: 0.9rem;
+    }
   }
 
   .range-results p {

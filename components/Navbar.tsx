@@ -1,10 +1,8 @@
-import styles from "../styles/components/Navbar.module.scss"
-// import { ThemeToggle } from "./ThemeToggle"
+import { useEffect } from "react"
 import { useFilters } from "../contexts/FiltersContext"
-
 import dynamic from "next/dynamic"
 import Link from "next/link";
-// import PokedexLogo from "public/images/pokedex-logo.png"
+import styles from "../styles/components/Navbar.module.scss"
 
 // use React.ReactNode interface if the component has no props
 const ThemeToggle = dynamic<React.ReactNode>(() => import("./ThemeToggle").then(({ ThemeToggle }) => ThemeToggle), {
@@ -16,13 +14,14 @@ const ThemeToggle = dynamic<React.ReactNode>(() => import("./ThemeToggle").then(
 
 export const Navbar = () => {
 
-  const [setFilters] = useFilters()
+  const [ , setFilters] = useFilters()
+
 
   return (
     <nav className={styles.nav}>
       <div className={styles.main}>
         <Link 
-          href="/"
+          href="/?limit=20&offset=0&sort=asc"
         >
           <a
             onClick={() => setFilters({
@@ -30,6 +29,14 @@ export const Navbar = () => {
               generation: {
                 idStart: null,
                 idEnd: null
+              },
+              weight: {
+                weightStart: 0,
+                weightEnd: 1000
+              },
+              height: {
+                heightStart: 0,
+                heightEnd: 20
               }
             })}
           >

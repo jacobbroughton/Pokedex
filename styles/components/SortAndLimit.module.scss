@@ -1,0 +1,52 @@
+.sort-and-limit {
+  // position: fixed;
+  // top: 105px;
+  // left: 20px;
+  width: 200px;
+  background: var(--card-background);
+  box-shadow: var(--card-shadow);
+  height: fit-content;
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  // z-index: 2;
+
+  .sort-and-limit-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 5px;
+    }
+
+    .limit-buttons {
+      grid-template-columns: repeat(3, 1fr);
+
+    }
+  
+    button {
+      border: 0;
+      border-radius: 3px;
+      padding: 3px 5px;
+      background: var(--filter-button-background);
+      color: var(--color-text-primary);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: border .15s ease;
+
+      &.selected{
+        border: var(--button-border);
+      }
+    }
+  
+    .limit-all-button {
+      grid-column: 1/4;
+    }
+  }
+}

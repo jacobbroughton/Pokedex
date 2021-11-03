@@ -3,7 +3,5 @@
 export async function callApi(url: string) {
   let response = await fetch(url)
   let data = await response.json()
-  console.log(url)
-  
   return data
 }

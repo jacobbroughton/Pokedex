@@ -6,14 +6,16 @@ const FiltersContext = createContext({
     idStart: null,
     idEnd: null
   },
-  weight: {
-    weightStart: 0,
-    weightEnd: 1000
-  },
-  height: {
-    heightStart: 0,
-    heightEnd: 20
-  }
+  weight: 1000,
+  // weight: {
+  //   weightStart: 0,
+  //   weightEnd: 1000
+  // },
+  height: 20
+  // height: {
+  //   heightStart: 0,
+  //   heightEnd: 20
+  // }
 })
 
 
@@ -33,14 +35,16 @@ export function FiltersProvider({ children }: FiltersProviderProps) {
       idStart: null,
       idEnd: null
     },
-    weight: {
-      weightStart: 0,
-      weightEnd: 1000
-    },
-    height: {
-      heightStart: 0,
-      heightEnd: 20
-    }
+    weight: 1000,
+    // weight: {
+    //   weightStart: 0,
+    //   weightEnd: 1000
+    // },
+    height: 20
+    // height: {
+    //   heightStart: 0,
+    //   heightEnd: 20
+    // }
   })
 
   // useEffect(() => {

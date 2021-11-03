@@ -31,6 +31,7 @@ body[data-theme="light"] {
   --filter-button-background: #eee;
   --heavy-shadow: 2px 2px 5px rgb(0 0 0 / 12%);
   --card-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+  --button-border: 1px solid orange;
 }
 
 body[data-theme="dark"] {
@@ -41,6 +42,7 @@ body[data-theme="dark"] {
   --filter-button-background: #555;
   --heavy-shadow: 2px 2px 5px rgb(0 0 0 / 24%);
   --card-shadow: 0 1px 2px #000;
+  --button-border: 1px solid orange;
 }
 
 body {
