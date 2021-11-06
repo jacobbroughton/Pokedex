@@ -1,21 +1,44 @@
 .single-pokemon-page {
-  padding-top: 120px;
+  padding-top: 70px;
 
   main {
     max-width: 500px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 30px;
+    padding: 20px 30px;
 
-    .sprites {
+    .intro-card {
       display: flex;
-      gap: 10px;
+      justify-content: space-between;
 
-      img {
-        width: 100%;
+      .intro-card-text {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .intro-card-text h1 {
+        line-height: 100%;
+        font-size: 2.5rem;
+      }
+
+      .intro-card-text .species {
+        font-size: 0.9rem;
+      }
+
+      .sprite {
+        height: 100%;
+        width: 100px;
+        filter: saturate(1.1) contrast(1.2);
       }
     }
+
+    .description {
+      line-height: 1.3rem;
+    }
+
 
     .pokemon-types {
       display: flex;
@@ -24,6 +47,7 @@
         padding: 3px 5px;
         border-radius: 3px;
         margin: 0;
+        font-size: 0.9rem;
 
         &.normal { background: #A8A77A; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
         &.fire { background: #EE8130; color: #fff; text-shadow: 1px 1px 1px #1818183c; }
@@ -46,15 +70,52 @@
       }
     }
 
+    .main-image,
+    .intro-card,
     .stats {
+      border-radius: 5px;
+      box-shadow: var(--card-shadow);
+      padding: 20px;
       background: var(--card-background);
-      padding: 15px;
+    }
+
+    .height-and-weight {
+      display: flex;
+      justify-content: space-around;
+
+      .item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .item .item-value {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      .item .item-name {
+        // margin-top: 10px;
+        font-size: 0.9rem;
+      }
+    }
+
+    .stats {
       display: flex;
       flex-direction: column;
       gap: 15px;
+
+      p {       
+        display: flex;
+        // flex-direction: column;
+        justify-content: space-between;
+      }
+
       .stat-items {
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         gap: 5px;
         .stat-item {
           display: flex;

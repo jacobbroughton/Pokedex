@@ -1,10 +1,12 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { usePokemonData } from "../contexts/PokemonDataContext"
 import { useFormattedName } from "../utilities/useFormattedName"
 import styles from "../styles/components/PokemonCard.module.scss"
+import { PokemonCardProps } from "../types"
 
-const PokemonCard = ({ pokemon }) => {
+
+const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
 
   const [imageLoading, setImageLoading] = useState(true)
 
@@ -26,9 +28,6 @@ const PokemonCard = ({ pokemon }) => {
             )}
           </div>
         </div>
-
-       {/* { imageLoading && <div className={styles['image-placeholder']}></div>} */}
-
 
         { pokemon.hires ? 
           <img 

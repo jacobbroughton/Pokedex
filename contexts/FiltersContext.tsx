@@ -1,60 +1,54 @@
-import React, { useState, useEffect, createContext, useContext } from "react"
+import React, { useState, useEffect, createContext, useContext, Dispatch } from "react"
 
-const FiltersContext = createContext({
+interface FilterTypes {
+  type: string | null,
+  generation: {
+    name: string | null,
+    idStart: number | null,
+    idEnd: number | null
+  },
+  weight: number,
+  height: number
+}
+
+const InitialFiltersValue = {
   type: null,
   generation: {
+    name: null,
     idStart: null,
     idEnd: null
   },
   weight: 1000,
-  // weight: {
-  //   weightStart: 0,
-  //   weightEnd: 1000
-  // },
   height: 20
-  // height: {
-  //   heightStart: 0,
-  //   heightEnd: 20
-  // }
-})
+}
 
+
+const SetFiltersContext = createContext<null | React.Dispatch<React.SetStateAction<FilterTypes>>>(null)
+
+const FiltersContext = createContext<FilterTypes>(InitialFiltersValue)
+
+interface FiltersProviderProps {
+  children: JSX.Element,
+}
+
+export function FiltersProvider({ children }: FiltersProviderProps) {
+
+  const [filters, setFilters] = useState<FilterTypes>(InitialFiltersValue)
+
+  return (
+    <SetFiltersContext.Provider value={setFilters}>
+      <FiltersContext.Provider value={filters}>
+        {children}
+      </FiltersContext.Provider>
+    </SetFiltersContext.Provider>
+
+  )
+}
 
 export function useFilters() {
   return useContext(FiltersContext)
 }
 
-interface FiltersProviderProps {
-  children: JSX.Element
-}
-
-export function FiltersProvider({ children }: FiltersProviderProps) {
-
-  const [filters, setFilters] = useState({  
-    type: null,
-    generation: {
-      idStart: null,
-      idEnd: null
-    },
-    weight: 1000,
-    // weight: {
-    //   weightStart: 0,
-    //   weightEnd: 1000
-    // },
-    height: 20
-    // height: {
-    //   heightStart: 0,
-    //   heightEnd: 20
-    // }
-  })
-
-  // useEffect(() => {
-  //   console.log('---FILTERS---', filters)
-  // }, [filters])
-
-
-  return (
-    <FiltersContext.Provider value={[filters, setFilters]}>
-      {children}
-    </FiltersContext.Provider>
-  )
+export function useSetFilters() {
+  return useContext(SetFiltersContext)
 }

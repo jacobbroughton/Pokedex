@@ -1,17 +1,25 @@
-import { createContext, useContext, useState, useEffect } from "react"
+import React, { createContext, useContext, useState, useEffect } from "react"
 import { useRouter } from "next/router"
 
-const SortContext = createContext({
-  name: null,
-  slug: null
-})
-
-
-export function useSort() {
-  return useContext(SortContext)
+interface SortTypes {
+  name: string,
+  slug: string
 }
 
-export function SortProvider({ children }) {
+const InitialSortValue = {
+  name: 'Asc By ID',
+  slug: 'asc'
+}
+
+const SetSortContext = createContext<null | React.Dispatch<React.SetStateAction<SortTypes>>>(null)
+
+const SortContext = createContext<SortTypes>(InitialSortValue)
+
+interface SortProviderProps {
+  children: JSX.Element
+}
+
+export function SortProvider({ children }: SortProviderProps) {
 
   const sortValues = [
     {
@@ -35,10 +43,7 @@ export function SortProvider({ children }) {
   const { query, isReady } = useRouter()
   let { sort: sortFromQuery } = query
 
-  const [sortOrder, setSortOrder] = useState({
-    name: null,
-    slug: null
-  })
+  const [sortOrder, setSortOrder] = useState(InitialSortValue)
 
   useEffect(() => {
     if(isReady) {
@@ -46,9 +51,20 @@ export function SortProvider({ children }) {
     }
   }, [isReady])
 
+
   return (
-    <SortContext.Provider value={[sortOrder, setSortOrder]}>
-      { children }
-    </SortContext.Provider>
+    <SetSortContext.Provider value={setSortOrder}>
+      <SortContext.Provider value={sortOrder}>
+        { children }
+      </SortContext.Provider>
+    </SetSortContext.Provider>
   )
 } 
+
+export function useSort() {
+  return useContext(SortContext)
+}
+
+export function useSetSort() {
+  return useContext(SetSortContext)
+}

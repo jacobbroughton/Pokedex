@@ -10,7 +10,7 @@ import { FiltersProvider } from "../contexts/FiltersContext"
 
 
 function MyApp({ Component, pageProps }: AppProps) {
-
+  
   return (
     <PaginationProvider>
       <FiltersProvider>

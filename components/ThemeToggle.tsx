@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, FC } from "react"
 import styled from "@emotion/styled"
 
-export const ThemeToggle = () => {
+export const ThemeToggle: FC = () => {
 
   const [activeTheme, setActiveTheme] = useState<string>(document.body.dataset.theme!)
   const inactiveTheme = activeTheme === "light" ? "dark" : "light"

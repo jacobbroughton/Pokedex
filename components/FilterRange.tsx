@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Range } from 'react-range';
 import { useFilters } from "../contexts/FiltersContext"
 
-const FilterRange = ({ startValue, endValue, min, max, step, onChangeFunc }) => {
+const FilterRange: FC = ({ startValue, endValue, min, max, step, onChangeFunc }) => {
 
   const [filters] = useFilters()
 

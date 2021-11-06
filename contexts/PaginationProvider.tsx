@@ -13,15 +13,9 @@ const PaginationContext = createContext<PaginationContextProps>({
   offset: '0'
 })
 
-// Export provider
 interface PaginationProviderProps {
   children: JSX.Element
 }
-
-export function usePagination() {
-  return useContext(PaginationContext)
-}
-
 
 export function PaginationProvider({ children }: PaginationProviderProps) {
 
@@ -35,10 +29,14 @@ export function PaginationProvider({ children }: PaginationProviderProps) {
   })
 
   useEffect(() => {
-    setPaginationValues({
-      limit: limitFromQuery,
-      offset: offsetFromQuery
-    })
+    console.log("READY")
+    if(isReady) {
+      setPaginationValues({
+        limit: limitFromQuery,
+        offset: offsetFromQuery
+      })
+    }
+
   }, [isReady])
 
   return (
@@ -48,7 +46,6 @@ export function PaginationProvider({ children }: PaginationProviderProps) {
   )
 }
 
-// Export usePaginationContext hook
-export function usePaginationContext() {
+export function usePagination() {
   return useContext(PaginationContext)
 }
