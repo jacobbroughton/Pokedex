@@ -1,16 +1,15 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 import { useFilters, useSetFilters } from "../contexts/FiltersContext"
-import { usePokemonDataUpdate } from "../contexts/PokemonDataContext"
-import { useFormattedName } from "../utilities/useFormattedName"
+// import { usePokemonDataUpdate } from "../contexts/PokemonDataContext"
+import { formatLowerCaseString  } from "../utilities/formatLowerCaseString"
 import styles from "../styles/components/Filters.module.scss"
 import { useRouter } from "next/router"
 
 const Filters: FC = () => {
 
   const { isReady, query, push } = useRouter()
-  const getPokemon = usePokemonDataUpdate()
   const filters = useFilters()
-  const setFilters = useSetFilters()
+  const setFilters = useSetFilters()!
 
   const { type, generation: { name, idStart, idEnd }, weight, height} = filters
 
@@ -138,36 +137,21 @@ const Filters: FC = () => {
     }
   ]
 
-  let heights = ["0.5", "1", "1.5", '2', "2.5", '3', "3.5", "4", "4.5", '5']
-
-  function handleWeightSliderChange(e) {
+  function handleWeightSliderChange(e: React.PointerEvent) {
+    const unParsedWeight = (e.target as HTMLInputElement).value
     setFilters({
       ...filters,
-      weight: parseInt(e.target.value)
-      // weight: {
-      //   weightStart: e[0],
-      //   weightEnd: e[1]
-      // }
+      weight: parseInt(unParsedWeight)
     })
   }
 
-  function handleHeightSliderChange(e) {
-    console.log(e.target.value)
+  function handleHeightSliderChange(e: React.PointerEvent) {
+    const unParsedHeight = (e.target as HTMLInputElement).value
     setFilters({
       ...filters,
-      height: parseFloat(e.target.value)
-      // height: {
-      //   heightStart: e[0],
-      //   heightEnd: e[1]
-      // }
+      height: parseFloat(unParsedHeight)
     })
   }
-
-  useEffect(() => {
-    if(isReady) {
-      console.log(query)
-    }
-  }, [isReady])
 
   return (
     <div className={styles.aside}>
@@ -210,7 +194,7 @@ const Filters: FC = () => {
                 type: type.name
               })}
               className={styles[`${type.name.toLowerCase()}`]}
-            >{useFormattedName(type.name)}</button>
+            >{formatLowerCaseString (type.name)}</button>
           )}
         </div>
        </div>

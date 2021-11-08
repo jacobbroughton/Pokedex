@@ -1,22 +1,27 @@
 import React, { useEffect, FC } from 'react'
-import { usePagination } from "../contexts/PaginationProvider"
+import { usePagination, useSetPagination } from "../contexts/PaginationProvider"
 import { useSort, useSetSort } from "../contexts/SortContext"
+import { useLoading } from "../contexts/LoadingContext"
 import { usePokemonData } from '../contexts/PokemonDataContext'
 import styles from "../styles/components/SortAndLimit.module.scss"
 
 const SortAndLimit: FC = () => {
 
-  const [paginationValues, setPaginationValues] = usePagination()
+  const paginationValues = usePagination()
+  const isLoading = useLoading()
+  const setPaginationValues = useSetPagination()!
+
   const sortOrder = useSort()
-  const setSortOrder = useSetSort()
-  const { pokemonData } = usePokemonData()
+  const setSortOrder = useSetSort()!
+  const pokemonData = usePokemonData()
   const { count } = pokemonData
+  const { limit } = paginationValues
 
   const paginationButtonValues = ['20','40','60','80','100','150','200','250','300']
   const sortButtonValues = [
     {
-    name: 'A - Z',
-    slug: 'a-z'
+      name: 'A - Z',
+      slug: 'a-z'
     }, 
     {
       name: 'Z - A',
@@ -32,8 +37,9 @@ const SortAndLimit: FC = () => {
     }
   ]
 
+
   useEffect(() => {
-    if(paginationValues.limit >= count || !paginationButtonValues.includes(paginationValues.limit)) {
+    if((limit as number) >= count || !paginationButtonValues.includes(limit as string)) {
       setPaginationValues({
         ...paginationValues,
         limit: count
@@ -41,12 +47,13 @@ const SortAndLimit: FC = () => {
     }
   }, [count])
 
+
   return (
     <aside className={styles['sort-and-limit']}>
       <div className={styles['sort-and-limit-section']}>
         <h4>Sort By</h4>
         <div className={styles.buttons}>
-          {sortButtonValues.map((buttonValue, index) =>
+          {sortButtonValues.map((buttonValue: { name: string, slug: string }, index: number) =>
             <button 
               className={`
                 ${styles.button} 
@@ -63,7 +70,7 @@ const SortAndLimit: FC = () => {
         <h4>Limit Results</h4>
         <div className={`${styles.buttons} ${styles['limit-buttons']}` }>
           <>
-            {paginationButtonValues.map(buttonValue =>
+            {paginationButtonValues.map((buttonValue: string, index: number) =>
               parseInt(buttonValue) <= count && 
               <button 
                 className={`
@@ -74,6 +81,7 @@ const SortAndLimit: FC = () => {
                   ...paginationValues,
                   limit: buttonValue
                 })}
+                key={index}
               >{buttonValue}</button>)
             }      
             <button 

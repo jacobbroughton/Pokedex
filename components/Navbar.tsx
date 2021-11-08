@@ -1,9 +1,10 @@
-import { FC, useEffect } from "react"
+import { FC } from "react"
 import { useFilters, useSetFilters } from "../contexts/FiltersContext"
 import { usePagination } from "../contexts/PaginationProvider"
 import { useSort } from "../contexts/SortContext"
 import dynamic from "next/dynamic"
 import Link from "next/link";
+// import Image from "next/image"
 import styles from "../styles/components/Navbar.module.scss"
 
 // use React.ReactNode interface if the component has no props
@@ -17,9 +18,9 @@ const ThemeToggle = dynamic<React.ReactNode>(() => import("./ThemeToggle").then(
 export const Navbar: FC = () => {
 
   const filters = useFilters()
-  const setFilters = useSetFilters()
+  const setFilters = useSetFilters()!
 
-  const [paginationValues] = usePagination()
+  const paginationValues = usePagination()
   const sortOrder = useSort()
 
   const { limit, offset } = paginationValues

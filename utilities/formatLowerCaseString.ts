@@ -1,6 +1,6 @@
 
 
-export const useFormattedName = (name: string) => {
+export const formatLowerCaseString = (name: string) => {
   if(name.includes('-') ) {
     return name
       .split('-')

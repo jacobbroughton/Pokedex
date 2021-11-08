@@ -1,28 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { GetStaticProps, GetStaticPaths, NextPage } from 'next'
+// import Image from "next/image"
 // import PokemonCard from "../../components/PokemonCard"
 // import { useFormattedName } from "../../utilities/useFormattedName"
+import { PokemonCardProps, PokemonProps } from "../../types"
+import { determineEnv } from "../../utilities/determineEnv"
+import PokedexData from "../../pokedex.json"
+
 import styles from "../../styles/SinglePokemonPage.module.scss"
 
-const SinglePokemonPage: NextPage = ({ pokemon }) => {
+const SinglePokemonPage: NextPage<PokemonCardProps> = ({ pokemon }) => {
+
+  console.log(pokemon)
 
   const { base: stats, description, evolution, hires, id, name, profile, species, sprite, type: types } = pokemon
 
-  useEffect(() => {
-    console.log(pokemon)
-  }, [pokemon])
+  // type EvolutionsProps = Array<{
+  //   id: number
+  // }>
 
-  type EvolutionsProps = Array<{
-    id: number
-  }>
-
-  const [evolutions, setEvolutions] = useState<EvolutionsProps>()
-
-  // useEffect(() => {
-  //   if(pokemon.evolution)
-  //   pokemon.evolution.prev
-
-  // }, [])
+  // const [evolutions, setEvolutions] = useState<EvolutionsProps>()
 
   return (
     <div className={styles['single-pokemon-page']}>
@@ -32,7 +29,7 @@ const SinglePokemonPage: NextPage = ({ pokemon }) => {
             <h1>{name.english}</h1>
             <span className={styles.species}>({species})</span>
             <div className={styles['pokemon-types']}>
-              {pokemon.type.map((typeItem, index) => 
+              {types.map((typeItem: string, index: number) => 
                 <p 
                   className={`${styles[`pokemon-type`]} ${styles[`${typeItem.toLowerCase()}`]}`}
                   key={index}
@@ -41,12 +38,12 @@ const SinglePokemonPage: NextPage = ({ pokemon }) => {
             </div>
           </div>
 
-          <img className={styles.sprite} src={sprite}/>
+          <img className={styles.sprite} alt={`${name.english}'s sprite`} src={sprite}/>
         </div>
 
         <p className={styles.description}>{description}</p>
 
-        <img className={styles['main-image']} src={hires}/>
+        <img className={styles['main-image']} src={hires} alt={name.english}/>
 
         <div className={styles['height-and-weight']}>
           <div className={styles.item}>
@@ -75,34 +72,38 @@ const SinglePokemonPage: NextPage = ({ pokemon }) => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
 
-  console.log(context)
+  const { id } = context.params!
+  // const baseUrl = determineEnv()
 
-  const { id } = context.params
+  // const response = await fetch(`${baseUrl}/api/pokemon/${id}`)
+  // const pokemon = await response.json()
 
-  const response = await fetch(`http://localhost:3000/api/pokemon/${id}`)
-  const pokemon = await response.json()
+  const pokemon = PokedexData.filter(indexedPokemon => indexedPokemon.id === parseInt(id as string))[0]
 
-  return {
-    props: {
-      pokemon
+  // if(pokemon) {
+    return {
+      props: {
+        pokemon
+      }
     }
-  }
+  // }
+
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // const response = await fetch(`/api/pokemon`)
-  const response = await fetch('http://localhost:3000/api/pokemon')
-  const pokemon = await response.json()
+  // const baseUrl = determineEnv()
+  // const response = await fetch(`${baseUrl}/api/pokemon`)
+  // const pokemonList = await response.json()
 
-  console.log(pokemon)
+  // console.log(pokemonList)
 
-  const paths = pokemon.pokemonList.map(pokemon => ({
-    params: { id: toString(pokemon.id) }
+  const paths = PokedexData.map(pokemon => ({
+    params: { id: pokemon.id.toString() }
   }))
 
   return {
     paths,
-    fallback: "blocking"
+    fallback: false
   }
 }
 

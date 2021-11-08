@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext, Dispatch } from "react"
+import React, { useState, createContext, useContext } from "react"
 
 interface FilterTypes {
   type: string | null,
