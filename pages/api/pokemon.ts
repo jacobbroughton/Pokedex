@@ -25,7 +25,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     let limit = parseInt(limitStr as string)
     let offset = parseInt(offsetStr as string)
 
-    console.log(limit, offset)
+    // console.log(limit, offset)
   
     let filteredData = PokedexData
   

@@ -30,13 +30,21 @@ export function PaginationProvider({ children }: PaginationProviderProps) {
   const [paginationValues, setPaginationValues] = useState<PaginationContextTypes>(InitialPaginationValue)
 
   useEffect(() => {
-    if(isReady) {
+    if(isReady && limitFromQuery && offsetFromQuery) {
+      // console.log(limitFromQuery, offsetFromQuery)
       setPaginationValues({
         limit: (limitFromQuery as string),
         offset: (offsetFromQuery as string)
       })
     }
   }, [isReady])
+
+  useEffect(() => {
+
+    const {limit} = paginationValues
+
+    console.log({limit})
+  }, [paginationValues])
 
   return (
     <SetPaginationContext.Provider value={setPaginationValues}>

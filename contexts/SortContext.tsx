@@ -7,7 +7,7 @@ interface SortTypes {
 }
 
 const InitialSortValue = {
-  name: 'Asc By ID',
+  name: 'Asc by ID',
   slug: 'asc'
 }
 
@@ -44,12 +44,6 @@ export function SortProvider({ children }: SortProviderProps) {
   let { sort: sortFromQuery } = query
 
   const [sortOrder, setSortOrder] = useState(InitialSortValue)
-
-  useEffect(() => {
-    if(isReady) {
-      setSortOrder(sortValues.filter(sortValue => sortValue.slug === sortFromQuery)[0])
-    }
-  }, [isReady])
 
 
   return (

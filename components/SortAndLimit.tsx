@@ -1,4 +1,4 @@
-import React, { useEffect, FC } from 'react'
+import React, { useEffect, FC, useState } from 'react'
 import { usePagination, useSetPagination } from "../contexts/PaginationProvider"
 import { useSort, useSetSort } from "../contexts/SortContext"
 import { useLoading } from "../contexts/LoadingContext"
@@ -15,7 +15,7 @@ const SortAndLimit: FC = () => {
   const setSortOrder = useSetSort()!
   const pokemonData = usePokemonData()
   const { count } = pokemonData
-  const { limit } = paginationValues
+  const { limit, offset } = paginationValues
 
   const paginationButtonValues = ['20','40','60','80','100','150','200','250','300']
   const sortButtonValues = [
@@ -37,12 +37,30 @@ const SortAndLimit: FC = () => {
     }
   ]
 
+  const [prevLimit, setPrevLimit] = useState(limit)
 
+
+  // ---------
+  // --------------
+  // --------------------------
+  // Limit turnin to zero is because of this
   useEffect(() => {
-    if((limit as number) >= count || !paginationButtonValues.includes(limit as string)) {
+    console.log({"Count not equal to 0" : count !== 0})
+    console.log({"limit more than count": (limit as number) >= count})
+    console.log({"buttons include limit value": paginationButtonValues.includes(limit as string)})
+
+    if((count !== 0 && (limit as number) >= count) || !paginationButtonValues.includes(limit as string)) {
+      setPrevLimit(limit)
       setPaginationValues({
         ...paginationValues,
         limit: count
+      })
+    }
+
+    if(offset > count) {
+      setPaginationValues({
+        limit: prevLimit,
+        offset: paginationButtonValues.filter(buttonValue => parseInt(buttonValue) < count)[0]
       })
     }
   }, [count])

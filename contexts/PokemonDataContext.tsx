@@ -48,18 +48,18 @@ export function PokemonDataProvider({ children }: PokemonDataProviderProps) {
 
   async function getPokemon(url: string) {
     setIsLoading(true)
-    if(isReady && Object.keys(query).length !== 0) {
-      console.log("---------------------------------------")
-      console.log("ITS HAPPENIN")
-      console.log("----------------------------------------")
+    if(isReady) {
+      // console.log(url)
       setPokemonData(await callApi(url))
       setIsLoading(false)
     }
   }
 
   useEffect(() => {
-    if(isReady && Object.keys(query).length !== 0) {
-      console.log(paginationValues)
+    // console.log({filters, paginationValues, sortOrder, isReady})
+    if(isReady) {
+      // console.log(query)
+      // console.log({baseUrl, type, idStart, idEnd, weight, height, limit, offset, sortOrder})
       getPokemon(`
         ${baseUrl}/api/pokemon
         ${type ? `?type=${type}` : ''}
@@ -69,16 +69,19 @@ export function PokemonDataProvider({ children }: PokemonDataProviderProps) {
         ${`${type || (idStart && idEnd) ? '&' : '?'}weight=${weight}`}
         
         &height=${height}
-        &limit=${limit ? limit : query.limit}&offset=${offset ? offset : query.offset}
-        &sort=${sortOrder ? sortOrder?.slug : query.sort}
+        &limit=${limit ? limit : 20}&offset=${offset ? offset : 0}
+        &sort=${sortOrder ? sortOrder?.slug : 'asc'}
       `
       .replace(/\s/g, ''))
 
       if(limit && offset && sortOrder.slug) push(`/?limit=${limit}&offset=${offset}&sort=${sortOrder.slug}`)
     }
-  }, [
-    filters, paginationValues, sortOrder, 
-    isReady])
+  }, [filters, paginationValues, sortOrder, isReady])
+
+
+  // useEffect(() => {
+  //   console.log(pokemonData)
+  // }, [pokemonData])
 
 
   return (

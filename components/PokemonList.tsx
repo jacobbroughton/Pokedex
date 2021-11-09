@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import styles from "../styles/components/PokemonList.module.scss"
 import PokemonCard from './PokemonCard'
 import Loading from './Loading'
