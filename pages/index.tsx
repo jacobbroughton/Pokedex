@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
@@ -12,6 +12,8 @@ import { useRouter } from "next/router"
 const Home: NextPage = () => {
 
   const router = useRouter()
+  
+  const [dropdownOpen, setDropdownOpen] = useState(true)
 
   useEffect(() => {
     if(router.pathname === "/" && Object.keys(router.query).length === 0) {
@@ -26,12 +28,21 @@ const Home: NextPage = () => {
         <meta name="description" content="Created by Jacob Broughton" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <aside className={styles.aside}>
-        <SortAndLimit/>
-        <Filters/>
-      </aside>
+      {/* <div className={styles['aside-parent']}> */}
+        {/* { !dropdownOpen && <button className={styles['open-dropdown-button']} onClick={() => setDropdownOpen(true)}>View Filters</button>}
+        { dropdownOpen &&
+          <aside className={styles.aside}>
+            <button className={styles['exit-dropdown-button']} onClick={() => setDropdownOpen(false)}>X</button>
+            <SortAndLimit/>
+            <Filters/>
+          </aside> */}
+        
 
+      {/* </div> */}
+
+      <Filters/>
       <PokemonList/>
+      <SortAndLimit/>
     </div>
   )
 }

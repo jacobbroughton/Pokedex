@@ -1,29 +1,100 @@
 .container {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   padding: 0 0.5rem;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  /* flex-direction: column; */
+  justify-content: center;
+  /* align-items: center; */
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
+  justify-content: space-between;
+  gap: 20px;
   /* height: 100vh; */
+  z-index: 1;
+}
+
+/* .aside-parent {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: fixed;
+  background: blue;
+  padding: 20px;
+  padding-top: 85px;
+  height: 100vh;
+  z-index: 2;
+} */
+
+.aside-parent .open-dropdown-button {
+  width: 100%;
+  background: var(--card-background);
+  box-shadow: var(--card-shadow);
+  color: var(--color-text-primary);
+  border: 0;
+  padding: 10px 15px;
+  z-index: 3;
+  border-radius: 3px;
+  display: none;
+  text-align: start;
+  cursor: pointer;
 }
 
 .aside {
-  position: fixed;
-  top: 85px;
-  left: 20px;
+  position: sticky;
+  align-self: flex-start;
+  top: 80px;
+  left: 0;
+  height: fit-content;
   display: flex;
   flex-direction: column;
-  gap: 20px;
   z-index: 2;
+  box-shadow: var(--card-shadow);
+  border-radius: 5px;;
+  overflow: hidden;
 }
+
+.aside .exit-dropdown-button {
+  background-color: transparent;
+  border: 0;
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  /* bottom: 0; */
+  color: crimson;
+  font-weight: 600;;
+  z-index: 3;
+  display: none;
+}
+
 
 @media only screen and (max-width: 900px) {
   .container {
-    align-items: flex-end;
-    padding: 0 30px;
+    /* align-items: flex-end; */
+    /* padding: 0 30px; */
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  .aside-parent {
+    padding-top: 85px;
+  }
+
+  .aside-parent .open-dropdown-button,
+  .aside-parent .exit-dropdown-button {
+    display: block;
+  }
+
+
+  .aside {
+    width: calc(100% - 40px);
+    /* border-radius: 0 0 5px 5px; */
   }
 }

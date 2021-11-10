@@ -3,10 +3,12 @@
   flex-direction: column;
   // justify-content: flex-start;
   gap: 20px;
-  padding-top: 85px;
+  padding-top: 80px;
   padding-bottom: 50px;
-  max-width: 424px;
+  max-width: 500px;
+  min-width: 424px;
   width: 100%;
+  align-self: center;
 
 
   .previous-and-next-buttons {
@@ -31,6 +33,22 @@
     &:hover {
       box-shadow: none;
       transform: translateY(2px);
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    &.pokemon-list {
+      align-self: flex-end;
+      // margin-right: 20px;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    &.pokemon-list {
+      padding-top: 150px;
+      align-self: center;
+      max-width: none;
+      margin-right: 0;
     }
   }
 }
