@@ -17,6 +17,13 @@
   top: 80px;
   left: 0;
   // margin-right: 20px;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+  }
 
   .filters-heading {
     display: flex;
@@ -101,6 +108,10 @@
     &.dark { background: #705746; }
     &.steel { background: #B7B7CE; text-shadow: 1px 1px 1px #18181877; }
     &.fairy { background: #D685AD; }
+
+    &.selected {
+      text-decoration: underline;
+    }
   }
 
   .generation-filters {
@@ -144,7 +155,31 @@
     font-size: 0.9rem;
   }
 
-  @media screen and (max-width: 700px) {
-    width: 100%;
+  @media screen and (max-width: 885px) {
+    // display: none;
+    left: unset;
+    position: fixed;
+    right: 20px;
+    // left: 20px;
+    top: 50px;
+    gap: 0;
+    overflow-y: scroll;
+    visibility: 0;
+    opacity: 0;
+    z-index: 0;
+    height: auto;
+
+    .filter-section {
+      gap: 5px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--color-bg-primary);
+
+      &:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+    }
   }
+
+
 }

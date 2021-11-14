@@ -32,7 +32,7 @@
       gap: 10px;
 
       .pokemon-name {
-        font-size: 1.25rem;
+        font-size: 1.35rem;
         font-weight: 600;
         margin: 0;
       }
@@ -146,5 +146,7 @@
     text-align: center;
   }
 
-
+  @media screen and (max-width: 885px) {
+    padding: 10px 25px;
+  }
 }

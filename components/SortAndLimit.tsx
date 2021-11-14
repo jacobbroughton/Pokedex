@@ -1,15 +1,20 @@
 import React, { useEffect, FC, useState } from 'react'
-import { usePagination, useSetPagination } from "../contexts/PaginationProvider"
+import { usePagination, useSetPagination } from "../contexts/PaginationContext"
 import { useSort, useSetSort } from "../contexts/SortContext"
 import { useLoading } from "../contexts/LoadingContext"
 import { usePokemonData } from '../contexts/PokemonDataContext'
+import { useSetMenus } from "../contexts/MenusContext";
 import styles from "../styles/components/SortAndLimit.module.scss"
 
-const SortAndLimit: FC = () => {
+interface SortAndLimitTypes {
+  visible: boolean
+}
+
+const SortAndLimit: FC<SortAndLimitTypes> = ({ visible }) => {
 
   const paginationValues = usePagination()
-  const isLoading = useLoading()
   const setPaginationValues = useSetPagination()!
+  const setMenusOpen = useSetMenus()!
 
   const sortOrder = useSort()
   const setSortOrder = useSetSort()!
@@ -45,9 +50,9 @@ const SortAndLimit: FC = () => {
   // --------------------------
   // Limit turnin to zero is because of this
   useEffect(() => {
-    console.log({"Count not equal to 0" : count !== 0})
-    console.log({"limit more than count": (limit as number) >= count})
-    console.log({"buttons include limit value": paginationButtonValues.includes(limit as string)})
+    // console.log({"Count not equal to 0" : count !== 0})
+    // console.log({"limit more than count": (limit as number) >= count})
+    // console.log({"buttons include limit value": paginationButtonValues.includes(limit as string)})
 
     if((count !== 0 && (limit as number) >= count) || !paginationButtonValues.includes(limit as string)) {
       setPrevLimit(limit)
@@ -65,9 +70,32 @@ const SortAndLimit: FC = () => {
     }
   }, [count])
 
+  function handleSortClick(buttonValue: { name: string, slug: string }) {
+    setSortOrder(buttonValue)
+    setMenusOpen({
+      sortMenuOpen: false,
+      filterMenuOpen: false,
+    })
+  }
+
+  function handlePaginationValueClick(buttonValue: string | null) {
+    setPaginationValues({
+      ...paginationValues,
+      limit: buttonValue ? buttonValue : count
+    })
+    setMenusOpen({
+      sortMenuOpen: false,
+      filterMenuOpen: false,
+    })
+  }
+
 
   return (
-    <aside className={styles['sort-and-limit']}>
+    <aside className={`
+      ${styles['sort-and-limit']}
+      ${visible ? styles.visible : ''}
+    `}>
+      {/* ${visible ? styles.visible : styles.hidden} */}
       <div className={styles['sort-and-limit-section']}>
         <h4>Sort By</h4>
         <div className={styles.buttons}>
@@ -77,7 +105,7 @@ const SortAndLimit: FC = () => {
                 ${styles.button} 
                 ${sortOrder?.name === buttonValue.name ? `${styles.selected}` : ''
               }`} 
-              onClick={() => setSortOrder(buttonValue)}
+              onClick={() => handleSortClick(buttonValue)}
               key={index}
             >{buttonValue.name}</button>
           )}  
@@ -95,10 +123,7 @@ const SortAndLimit: FC = () => {
                   ${styles.button} 
                   ${paginationValues.limit === buttonValue ? `${styles.selected}` : ''}
                 `} 
-                onClick={() => setPaginationValues({
-                  ...paginationValues,
-                  limit: buttonValue
-                })}
+                onClick={() => handlePaginationValueClick(buttonValue)}
                 key={index}
               >{buttonValue}</button>)
             }      
@@ -108,10 +133,7 @@ const SortAndLimit: FC = () => {
                 ${styles['limit-all-button']} 
                 ${paginationValues.limit === count ? `${styles.selected}` : ''}
               `} 
-              onClick={() => setPaginationValues({
-                ...paginationValues,
-                limit: count
-              })}
+              onClick={() => handlePaginationValueClick(null)}
             >All</button>
           </>
         </div>

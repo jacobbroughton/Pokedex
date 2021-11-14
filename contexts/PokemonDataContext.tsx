@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react"
 import { useFilters } from "./FiltersContext"
-import { usePagination } from "./PaginationProvider"
+import { usePagination } from "./PaginationContext"
 import { useSort } from "./SortContext"
 import { useLoading, useSetLoading } from "./LoadingContext"
 import { callApi } from "../utilities/callApi"

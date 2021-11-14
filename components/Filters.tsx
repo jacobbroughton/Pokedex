@@ -1,15 +1,18 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { useFilters, useSetFilters } from "../contexts/FiltersContext"
-// import { usePokemonDataUpdate } from "../contexts/PokemonDataContext"
 import { formatLowerCaseString  } from "../utilities/formatLowerCaseString"
+import { useSetMenus } from "../contexts/MenusContext";
 import styles from "../styles/components/Filters.module.scss"
-import { useRouter } from "next/router"
 
-const Filters: FC = () => {
+interface FiltersTypes {
+  visible: boolean
+}
 
-  const { isReady, query, push } = useRouter()
+const Filters: FC<FiltersTypes> = ({ visible }) => {
+
   const filters = useFilters()
   const setFilters = useSetFilters()!
+  const setMenusOpen = useSetMenus()!
 
   const { type, generation: { name, idStart, idEnd }, weight, height} = filters
 
@@ -153,8 +156,20 @@ const Filters: FC = () => {
     })
   }
 
+  useEffect(() => {
+    console.log(filters)
+    setMenusOpen({
+      sortMenuOpen: false,
+      filterMenuOpen: false,
+    })
+  }, [filters])
+
   return (
-    <div className={styles.aside}>
+    <div className={`
+      ${styles.aside}
+      ${visible ? styles.visible : ''}
+    `}>
+      {/* ${visible ? styles.visible : styles.hidden} */}
       <div className={styles['filters-heading']}>
         <h3>Filters</h3>
         <button
@@ -193,7 +208,10 @@ const Filters: FC = () => {
                 ...filters,
                 type: type.name
               })}
-              className={styles[`${type.name.toLowerCase()}`]}
+              className={`
+                ${styles[`${type.name.toLowerCase()}`]}
+                ${type.name === filters.type ? "selected" : ''}
+              `}
             >{formatLowerCaseString (type.name)}</button>
           )}
         </div>

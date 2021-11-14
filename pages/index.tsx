@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.css'
 import PokemonList from "../components/PokemonList"
 import Filters from '../components/Filters'
 import SortAndLimit from '../components/SortAndLimit'
+import { useMenus } from "../contexts/MenusContext"
 // import { usePagination } from "../contexts/PaginationProvider"
 // import { useSort } from "../contexts/SortContext"
 import { useRouter } from "next/router"
@@ -12,6 +13,8 @@ import { useRouter } from "next/router"
 const Home: NextPage = () => {
 
   const router = useRouter()
+  const menusOpen = useMenus()
+  const { sortMenuOpen, filterMenuOpen } = useMenus()
   
   const [dropdownOpen, setDropdownOpen] = useState(true)
 
@@ -20,6 +23,16 @@ const Home: NextPage = () => {
       router.push('?limit=20&offset=0&sort=asc')
     }
   }, [router]) 
+
+  // const speak = (msg) => {
+  //   const sp = new SpeechSynthesisUtterance(msg);
+  //   [sp.voice] = speechSynthesis.getVoices()
+  //   speechSynthesis.speak(sp)
+  // }
+
+  // useEffect(() => {
+  //   speak(`Good morning, handsome. I thought about you all night, it turned my software into hardware. Just the anticipation of your strong and confident fingers pressing my keys in all the right places oh oh oh oh oh oh, please daddy jacob have mercy oh.`)
+  // }, [router])
 
   return (
     <div className={styles.container}>
@@ -40,9 +53,9 @@ const Home: NextPage = () => {
 
       {/* </div> */}
 
-      <Filters/>
+      <Filters visible={filterMenuOpen}/>
       <PokemonList/>
-      <SortAndLimit/>
+      <SortAndLimit visible={sortMenuOpen}/>
     </div>
   )
 }

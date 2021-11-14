@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react'
 import styles from "../styles/components/PokemonList.module.scss"
 import PokemonCard from './PokemonCard'
 import Loading from './Loading'
-import { usePagination, useSetPagination } from "../contexts/PaginationProvider"
+import { usePagination, useSetPagination } from "../contexts/PaginationContext"
 import { PokemonProps } from "../types"
 
 import { usePokemonData } from "../contexts/PokemonDataContext"
@@ -37,23 +37,42 @@ const PokemonList: FC = () => {
           )}   
           <div className={styles['previous-and-next-buttons']}>
             {previous && 
-              <button 
-                onClick={() => setPaginationValues({
-                  limit: limit,
-                  offset: (offsetNum - limitNum) > 0 ? `${offsetNum - limitNum}` : '0'
-                })}
-                className={styles['previous-button']}
+              <div className={styles['pagination-button-group']}>
+                <button 
+                  onClick={() => setPaginationValues({
+                    limit: limit,
+                    offset: '0'
+                  })}
+                  className={styles['previous-button']}
+                >&lt;&lt;</button>
+
+                <button 
+                  onClick={() => setPaginationValues({
+                    limit: limit,
+                    offset: (offsetNum - limitNum) > 0 ? `${offsetNum - limitNum}` : '0'
+                  })}
+                  className={styles['previous-button']}
                 >Previous</button>
+              </div>
             }
             {next && 
-              <button 
-                onClick={() => setPaginationValues({
-                  limit: limit,
-                  offset: `${offsetNum + limitNum}`
-                })}
-                className={styles['next-button']}
-              >Next</button>
-              }
+              <div className={styles['pagination-button-group']}>
+                <button 
+                  onClick={() => setPaginationValues({
+                    limit: limit,
+                    offset: `${offsetNum + limitNum}`
+                  })}
+                  className={styles['next-button']}
+                >Next</button>
+                <button 
+                  onClick={() => setPaginationValues({
+                    limit: limit,
+                    offset: `${count - limitNum}`
+                  })}
+                  className={styles['next-button']}
+                >&gt;&gt;</button>
+              </div>
+            }
           </div>
         </>
       }
