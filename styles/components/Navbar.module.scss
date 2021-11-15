@@ -8,7 +8,6 @@
 
   .main {
     width: 100%;
-    // max-width: 1200px;
     max-width: 960px;
     margin: 0 auto;
     display: flex;
@@ -20,7 +19,7 @@
       user-select: none;
     }
 
-    img {
+    a img {
       max-height: 40px;
     }
 
@@ -43,7 +42,6 @@
     }
 
     .nav-buttons .filters-button {
-      // background-image: var(--filter-icon-bg);
       background-size: cover;
       width: 25px;
     }

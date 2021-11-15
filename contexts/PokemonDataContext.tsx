@@ -2,11 +2,12 @@ import { createContext, useContext, useState, useEffect } from "react"
 import { useFilters } from "./FiltersContext"
 import { usePagination } from "./PaginationContext"
 import { useSort } from "./SortContext"
-import { useLoading, useSetLoading } from "./LoadingContext"
+import { useSetLoading } from "./LoadingContext"
 import { callApi } from "../utilities/callApi"
 import { useRouter } from "next/router"
 import { PokemonProps } from "../types"
 import { determineEnv } from "../utilities/determineEnv"
+import { useSearch } from "./SearchContext"
 
 interface PokemonDataTypes {
   count: number,
@@ -23,7 +24,6 @@ const InitialPokemonData = {
 }
 
 const PokemonDataContext = createContext<PokemonDataTypes>(InitialPokemonData)
-// const PokemonDataUpdateContext = createContext<null | ((url: string) => Promise<void>)>(null)
 
 
 interface PokemonDataProviderProps {
@@ -37,8 +37,9 @@ export function PokemonDataProvider({ children }: PokemonDataProviderProps) {
   const sortOrder = useSort()
   const setIsLoading = useSetLoading()!
   const baseUrl = determineEnv()
+  const searchValue = useSearch()
 
-  const { push, isReady, query } = useRouter()
+  const { pathname, push, isReady, query } = useRouter()
 
   const { type, generation, weight, height } = filters
   const { idStart, idEnd } = generation
@@ -49,17 +50,13 @@ export function PokemonDataProvider({ children }: PokemonDataProviderProps) {
   async function getPokemon(url: string) {
     setIsLoading(true)
     if(isReady) {
-      // console.log(url)
       setPokemonData(await callApi(url))
       setIsLoading(false)
     }
   }
 
   useEffect(() => {
-    // console.log({filters, paginationValues, sortOrder, isReady})
     if(isReady) {
-      // console.log(query)
-      // console.log({baseUrl, type, idStart, idEnd, weight, height, limit, offset, sortOrder})
       getPokemon(`
         ${baseUrl}/api/pokemon
         ${type ? `?type=${type}` : ''}
@@ -71,17 +68,13 @@ export function PokemonDataProvider({ children }: PokemonDataProviderProps) {
         &height=${height}
         &limit=${limit ? limit : 20}&offset=${offset ? offset : 0}
         &sort=${sortOrder ? sortOrder?.slug : 'asc'}
+        ${searchValue ? `&search=${searchValue}` : ''}
       `
       .replace(/\s/g, ''))
 
-      if(limit && offset && sortOrder.slug) push(`/?limit=${limit}&offset=${offset}&sort=${sortOrder.slug}`)
+      if(pathname === "/" && limit && offset && sortOrder.slug) push(`/?limit=${limit}&offset=${offset}&sort=${sortOrder.slug}${searchValue ? `&search=${searchValue}` : ''}`)
     }
-  }, [filters, paginationValues, sortOrder, isReady])
-
-
-  // useEffect(() => {
-  //   console.log(pokemonData)
-  // }, [pokemonData])
+  }, [filters, paginationValues, sortOrder, isReady, searchValue])
 
 
   return (
@@ -94,7 +87,3 @@ export function PokemonDataProvider({ children }: PokemonDataProviderProps) {
 export function usePokemonData() {
   return useContext(PokemonDataContext)
 }
-
-// export function usePokemonDataUpdate() {
-//   return useContext(PokemonDataUpdateContext)
-// }

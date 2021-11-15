@@ -1,7 +1,4 @@
 .aside {
-  // position: fixed;
-  // top: 105px;
-  // left: 20px;
   width: 200px;
   background: var(--card-background);
   box-shadow: var(--card-shadow);
@@ -13,16 +10,13 @@
   gap: 20px;
   z-index: 2;
   position: sticky;
-  // align-self: flex-start;
   top: 80px;
   left: 0;
-  // margin-right: 20px;
   transition: opacity 0.15s ease, visibility 0.15s ease;
 
   &.visible {
-    opacity: 1;
-    visibility: visible;
     z-index: 2;
+    display: flex;
   }
 
   .filters-heading {
@@ -156,18 +150,14 @@
   }
 
   @media screen and (max-width: 885px) {
-    // display: none;
     left: unset;
     position: fixed;
     right: 20px;
-    // left: 20px;
     top: 50px;
     gap: 0;
     overflow-y: scroll;
-    visibility: 0;
-    opacity: 0;
-    z-index: 0;
     height: auto;
+    display: none;
 
     .filter-section {
       gap: 5px;

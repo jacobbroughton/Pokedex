@@ -1,8 +1,6 @@
 import Link from 'next/link'
 import React, { FC, useState } from 'react'
-// import { usePokemonData } from "../contexts/PokemonDataContext"
 import { formatLowerCaseString  } from "../utilities/formatLowerCaseString"
-// import Image from "next/image"
 import styles from "../styles/components/PokemonCard.module.scss"
 import { PokemonCardProps } from "../types"
 

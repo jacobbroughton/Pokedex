@@ -7,6 +7,8 @@ import { PokemonDataProvider } from "../contexts/PokemonDataContext"
 import { FiltersProvider } from "../contexts/FiltersContext"
 import { LoadingProvider } from "../contexts/LoadingContext"
 import { MenusProvider } from "../contexts/MenusContext"
+import { SearchProvider } from "../contexts/SearchContext"
+
 
 
 
@@ -17,13 +19,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       <LoadingProvider>
         <FiltersProvider>
           <SortProvider>
-            <PokemonDataProvider>
-              <MenusProvider>
-                <Layout>
-                  <Component {...pageProps} />
-                </Layout> 
-              </MenusProvider>
-            </PokemonDataProvider>
+            <SearchProvider>
+              <PokemonDataProvider>
+                <MenusProvider>
+                  <Layout>
+                    <Component {...pageProps} />
+                  </Layout> 
+                </MenusProvider>
+              </PokemonDataProvider>
+            </SearchProvider>
           </SortProvider>
         </FiltersProvider>
       </LoadingProvider>

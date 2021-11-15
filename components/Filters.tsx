@@ -157,7 +157,6 @@ const Filters: FC<FiltersTypes> = ({ visible }) => {
   }
 
   useEffect(() => {
-    console.log(filters)
     setMenusOpen({
       sortMenuOpen: false,
       filterMenuOpen: false,

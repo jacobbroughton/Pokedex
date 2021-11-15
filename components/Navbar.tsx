@@ -1,6 +1,6 @@
-import { FC, useEffect } from "react";
-import { useFilters, useSetFilters } from "../contexts/FiltersContext";
-import { usePagination } from "../contexts/PaginationContext";
+import { FC } from "react";
+import { useSetFilters } from "../contexts/FiltersContext";
+import { usePagination, useSetPagination } from "../contexts/PaginationContext";
 import { useSort } from "../contexts/SortContext";
 import { useSetMenus, useMenus } from "../contexts/MenusContext";
 import { useRouter } from "next/router";
@@ -8,6 +8,7 @@ import dynamic from "next/dynamic";
 import FilterIcon from "./FilterIcon"
 import Link from "next/link";
 import styles from "../styles/components/Navbar.module.scss";
+import { useSetSearch } from "../contexts/SearchContext";
 
 // use React.ReactNode interface if the component has no props
 const ThemeToggle = dynamic<React.ReactNode>(
@@ -23,10 +24,12 @@ const ThemeToggle = dynamic<React.ReactNode>(
 export const Navbar: FC = () => {
   const setFilters = useSetFilters()!;
   const paginationValues = usePagination();
+  const setPaginationValues = useSetPagination()!
   const sortOrder = useSort();
   const setMenusOpen = useSetMenus()!;
   const menusOpen = useMenus();
   const router = useRouter();
+  const setSearchValue = useSetSearch()!
 
   const { limit, offset } = paginationValues;
 
@@ -34,12 +37,14 @@ export const Navbar: FC = () => {
     <nav className={styles.nav}>
       <div className={styles.main}>
         <Link
-          href={`/?limit=${limit ? limit : 20}&offset=${
-            offset ? offset : 0
-          }&sort=${sortOrder ? sortOrder.slug : "asc"}`}
+          href={`/?limit=${limit ? limit : 20}&offset=${offset ? offset : 0}&sort=${sortOrder ? sortOrder.slug : "asc"}`}
         >
           <a
-            onClick={() =>
+            onClick={() => {
+              setPaginationValues({
+                limit: router.pathname === "/" ? '20' : (limit ? limit : '20'),
+                offset: router.pathname === "/" ? '0' : (offset ? offset : '0')
+              })
               setFilters({
                 type: null,
                 generation: {
@@ -50,7 +55,8 @@ export const Navbar: FC = () => {
                 weight: 1000,
                 height: 20,
               })
-            }
+              setSearchValue("")
+            }}
           >
             <img src="/images/pokedex-logo.png" alt="Pokedex" />
           </a>

@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-// import { usePokemonData } from "../contexts/PokemonDataContext"
 import styles from "../styles/components/Loading.module.scss"
 
 const Loading: FC = () => {

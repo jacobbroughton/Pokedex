@@ -1,25 +1,13 @@
 import React from 'react'
 import { GetStaticProps, GetStaticPaths, NextPage } from 'next'
-// import Image from "next/image"
-// import PokemonCard from "../../components/PokemonCard"
-// import { useFormattedName } from "../../utilities/useFormattedName"
 import { PokemonCardProps, PokemonProps } from "../../types"
-import { determineEnv } from "../../utilities/determineEnv"
 import PokedexData from "../../pokedex.json"
 
 import styles from "../../styles/SinglePokemonPage.module.scss"
 
 const SinglePokemonPage: NextPage<PokemonCardProps> = ({ pokemon }) => {
 
-  console.log(pokemon)
-
-  const { base: stats, description, evolution, hires, id, name, profile, species, sprite, type: types } = pokemon
-
-  // type EvolutionsProps = Array<{
-  //   id: number
-  // }>
-
-  // const [evolutions, setEvolutions] = useState<EvolutionsProps>()
+  const { base: stats, description, hires, id, name, profile, species, sprite, type: types } = pokemon
 
   return (
     <div className={styles['single-pokemon-page']}>
@@ -73,29 +61,17 @@ const SinglePokemonPage: NextPage<PokemonCardProps> = ({ pokemon }) => {
 export const getStaticProps: GetStaticProps = async (context) => {
 
   const { id } = context.params!
-  // const baseUrl = determineEnv()
-
-  // const response = await fetch(`${baseUrl}/api/pokemon/${id}`)
-  // const pokemon = await response.json()
 
   const pokemon = PokedexData.filter(indexedPokemon => indexedPokemon.id === parseInt(id as string))[0]
 
-  // if(pokemon) {
     return {
       props: {
         pokemon
       }
     }
-  // }
-
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // const baseUrl = determineEnv()
-  // const response = await fetch(`${baseUrl}/api/pokemon`)
-  // const pokemonList = await response.json()
-
-  // console.log(pokemonList)
 
   const paths = PokedexData.map(pokemon => ({
     params: { id: pokemon.id.toString() }

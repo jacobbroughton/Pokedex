@@ -44,21 +44,13 @@ const SortAndLimit: FC<SortAndLimitTypes> = ({ visible }) => {
 
   const [prevLimit, setPrevLimit] = useState(limit)
 
-
-  // ---------
-  // --------------
-  // --------------------------
-  // Limit turnin to zero is because of this
   useEffect(() => {
-    // console.log({"Count not equal to 0" : count !== 0})
-    // console.log({"limit more than count": (limit as number) >= count})
-    // console.log({"buttons include limit value": paginationButtonValues.includes(limit as string)})
 
     if((count !== 0 && (limit as number) >= count) || !paginationButtonValues.includes(limit as string)) {
       setPrevLimit(limit)
       setPaginationValues({
         ...paginationValues,
-        limit: count
+        limit: paginationButtonValues[0]
       })
     }
 

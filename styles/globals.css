@@ -4,7 +4,10 @@
 }
 
 html,
-body {
+body,
+#__next {
+  min-height: 100%;
+  height: 100%;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -19,6 +22,7 @@ body {
   --red: #e84848;
   --grey: #666666;
   --blue: #2ab1c6;
+  --yellow: #ffcd32;
   /* --lightblue: #4dc9d */
 
 }

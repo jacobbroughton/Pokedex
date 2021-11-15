@@ -24,7 +24,6 @@ export function MenusProvider({ children }: MenusProviderProps) {
   const width = useWidth()
 
   useEffect(() => {
-    console.log(width)
     if(typeof window !== 'undefined' && width > 885) {
       setMenusOpen({
         sortMenuOpen: true,

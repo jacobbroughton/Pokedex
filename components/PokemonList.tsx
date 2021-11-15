@@ -1,10 +1,10 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import styles from "../styles/components/PokemonList.module.scss"
 import PokemonCard from './PokemonCard'
 import Loading from './Loading'
+import SearchInput from "./SearchInput"
 import { usePagination, useSetPagination } from "../contexts/PaginationContext"
 import { PokemonProps } from "../types"
-
 import { usePokemonData } from "../contexts/PokemonDataContext"
 import { useLoading } from '../contexts/LoadingContext'
 
@@ -25,7 +25,8 @@ const PokemonList: FC = () => {
 
   return (
     <div className={styles['pokemon-list']}>
-      {count !== 0 && <p>Showing results {(pokemonList.indexOf(pokemonList[0]) + 1) + offsetNum} - {(pokemonList.indexOf(pokemonList[pokemonList.length - 1]) + 1) + offsetNum} out of {count} total results</p>}
+      {count > 1 && <p>Showing results {(pokemonList.indexOf(pokemonList[0]) + 1) + offsetNum} - {(pokemonList.indexOf(pokemonList[pokemonList.length - 1]) + 1) + offsetNum} out of {count} total results</p>}
+      <SearchInput/>
       { count === 0 ?
         <div className={styles['no-results-found']}>
           <p>No results, try a different set of filters</p>

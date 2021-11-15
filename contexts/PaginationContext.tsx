@@ -31,13 +31,13 @@ export function PaginationProvider({ children }: PaginationProviderProps) {
 
   useEffect(() => {
     if(isReady && limitFromQuery && offsetFromQuery) {
-      // console.log(limitFromQuery, offsetFromQuery)
+      console.log("ITS SWAG")
       setPaginationValues({
         limit: (limitFromQuery as string),
         offset: (offsetFromQuery as string)
       })
     }
-  }, [isReady])
+  }, [isReady, offsetFromQuery])
 
   useEffect(() => {
 

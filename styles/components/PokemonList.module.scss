@@ -1,14 +1,13 @@
 .pokemon-list {
   display: flex;
   flex-direction: column;
-  // justify-content: flex-start;
   gap: 20px;
   padding-top: 80px;
   padding-bottom: 50px;
   max-width: 500px;
   min-width: 424px;
   width: 100%;
-  align-self: center;
+  align-self: flex-start;
   z-index: 1;
 
 
@@ -43,19 +42,12 @@
     }
   }
 
-  @media screen and (max-width: 900px) {
-    &.pokemon-list {
-      align-self: flex-end;
-      // margin-right: 20px;
-    }
-  }
 
   @media screen and (max-width: 885px) {
     order: 2;
 
     &.pokemon-list {
       padding-top: 80px;
-      align-self: center;
       max-width: none;
       min-width: 0;
       margin-right: 0;
