@@ -14,16 +14,10 @@ body,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 16px;
 
-  /* --primary-bg: #fafafa; 
-  --secondary-bg: #f5f5f5;
-  --dark-text-color: #192331;
-  --light-text-color: #ffffff; */
-
   --red: #e84848;
   --grey: #666666;
-  --blue: #2ab1c6;
+  --blue: #323199;
   --yellow: #ffcd32;
-  /* --lightblue: #4dc9d */
 
 }
 
@@ -32,11 +26,12 @@ body[data-theme="light"] {
   --color-bg-secondary: #f5f5f5;
   --color-text-primary: #192331;
   --card-background: #fff;
-  --filter-button-background: #eee;
+  --filter-button-background: #f5f5f5;
   --heavy-shadow: 2px 2px 5px rgb(0 0 0 / 12%);
   --card-shadow: 0 1px 2px rgb(0 0 0 / 20%);
   --button-border: 1px solid orange;
-  --filter-icon-bg: url('/images/filter-dark.png')
+  --filter-icon-bg: url('/images/filter-dark.png');
+  --slider-track-bg: #323199;
 }
 
 body[data-theme="dark"] {
@@ -48,7 +43,8 @@ body[data-theme="dark"] {
   --heavy-shadow: 2px 2px 5px rgb(0 0 0 / 24%);
   --card-shadow: 0 1px 2px #000;
   --button-border: 1px solid orange;
-  --filter-icon-bg: url('/images/filter-light.png')
+  --filter-icon-bg: url('/images/filter-light.png');
+  --slider-track-bg: #e84848;
 }
 
 body {

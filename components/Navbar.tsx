@@ -5,7 +5,7 @@ import { useSort } from "../contexts/SortContext";
 import { useSetMenus, useMenus } from "../contexts/MenusContext";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
-import FilterIcon from "./FilterIcon"
+import FilterIcon from "./FilterIcon";
 import Link from "next/link";
 import styles from "../styles/components/Navbar.module.scss";
 import { useSetSearch } from "../contexts/SearchContext";
@@ -24,12 +24,12 @@ const ThemeToggle = dynamic<React.ReactNode>(
 export const Navbar: FC = () => {
   const setFilters = useSetFilters()!;
   const paginationValues = usePagination();
-  const setPaginationValues = useSetPagination()!
+  const setPaginationValues = useSetPagination()!;
   const sortOrder = useSort();
   const setMenusOpen = useSetMenus()!;
   const menusOpen = useMenus();
   const router = useRouter();
-  const setSearchValue = useSetSearch()!
+  const setSearchValue = useSetSearch()!;
 
   const { limit, offset } = paginationValues;
 
@@ -37,14 +37,16 @@ export const Navbar: FC = () => {
     <nav className={styles.nav}>
       <div className={styles.main}>
         <Link
-          href={`/?limit=${limit ? limit : 20}&offset=${offset ? offset : 0}&sort=${sortOrder ? sortOrder.slug : "asc"}`}
+          href={`/?limit=${limit ? limit : 20}&offset=${
+            offset ? offset : 0
+          }&sort=${sortOrder ? sortOrder.slug : "asc"}`}
         >
           <a
             onClick={() => {
               setPaginationValues({
-                limit: router.pathname === "/" ? '20' : (limit ? limit : '20'),
-                offset: router.pathname === "/" ? '0' : (offset ? offset : '0')
-              })
+                limit: router.pathname === "/" ? "20" : limit ? limit : "20",
+                offset: router.pathname === "/" ? "0" : offset ? offset : "0",
+              });
               setFilters({
                 type: null,
                 generation: {
@@ -54,8 +56,8 @@ export const Navbar: FC = () => {
                 },
                 weight: 1000,
                 height: 20,
-              })
-              setSearchValue("")
+              });
+              setSearchValue("");
             }}
           >
             <img src="/images/pokedex-logo.png" alt="Pokedex" />
@@ -85,7 +87,7 @@ export const Navbar: FC = () => {
                 }
                 className={styles["filters-button"]}
               >
-                <FilterIcon/>
+                <FilterIcon />
               </button>
             </>
           )}
